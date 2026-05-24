@@ -28,10 +28,14 @@ if ($stmt->num_rows === 0) {
     exit;
 }
 $stmt->bind_result($fullname, $hash, $role);
-$stmt->fetch();
+if (!$stmt->fetch() || $hash === null) {
+    $stmt->close();
+    header('Location: login.php?error=invalid');
+    exit;
+}
 $stmt->close();
 
-if (!password_verify($password, $hash)) {
+if (!is_string($hash) || !password_verify($password, $hash)) {
     header('Location: login.php?error=invalid');
     exit;
 }

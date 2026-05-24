@@ -1,5 +1,5 @@
-<!-- ── SEARCH ── -->
 <div class="search-section">
+  <div class="search-section">
   <div class="search-bar">
     <div class="search-field">
       <label>Destination</label>
@@ -23,23 +23,17 @@
         </optgroup>
       </select>
     </div>
-
     <div class="search-divider"></div>
-
     <div class="search-field">
       <label>Check In</label>
       <input type="date" id="checkIn" />
     </div>
-
     <div class="search-divider"></div>
-
     <div class="search-field">
       <label>Check Out</label>
       <input type="date" id="checkOut" />
     </div>
-
     <div class="search-divider"></div>
-
     <div class="search-field">
       <label>Travelers</label>
       <select>
@@ -49,9 +43,6 @@
         <option>6+ People</option>
       </select>
     </div>
-
-    <button class="btn-search" onclick="scrollToDestinations()">
-      🔍 Search
-    </button>
+    <button class="btn-search" onclick="scrollToDestinations()">🔍 Search</button>
   </div>
 </div>

@@ -9,7 +9,7 @@
 
   <div class="hero-ctas">
     <a href="#destinations" class="btn-primary">Explore Destinations</a>
-    <a href="#itinerary" class="btn-outline-white">Plan My Trip</a>
+    <a href="itinerary.php" class="btn-outline-white">Plan My Trip</a>
   </div>
 
   <div class="hero-stats">

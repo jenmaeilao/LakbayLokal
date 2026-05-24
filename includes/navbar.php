@@ -8,10 +8,10 @@ session_start();
   <div class="nav-logo">Lakbay<span>PH</span></div>
 
   <ul class="nav-links">
-    <li><a href="index.php">Home</a></li>
-    <li><a href="/pages/destinations.php">Destinations</a></li>
-    <li><a href="hotels/list.php">Hotels</a></li>
-    <li><a href="/pages/itinerary.php">Plan Trip</a></li>
+    <li><a href="<?= BASE_URL ?>/index.php">Home</a></li>
+    <li><a href="<?= BASE_URL ?>/hotels/list.php">Hotels</a></li>
+     <li><a href="<?= BASE_URL ?>/destinations.php">Destinations</a></li>
+    <li><a href="<?= BASE_URL ?>/itinerary.php">Plan Trip</a></li>
   </ul>
   
   <div class="nav-actions">

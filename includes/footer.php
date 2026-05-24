@@ -21,7 +21,7 @@
       <ul>
         <li><a href="#destinations">Destinations</a></li>
         <li><a href="#hotels">Featured Hotels</a></li>
-        <li><a href="#itinerary">Trip Planner</a></li>
+        <li><a href="<?= BASE_URL ?>/itinerary.php">Trip Planner</a></li>
         <li><a href="#reviews">Traveler Reviews</a></li>
       </ul>
     </div>

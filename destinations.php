@@ -5,7 +5,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LakbayPH — Plan Your Trip</title>
+  <title>LakbayPH — Destinations</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/styles.css" />
 </head>
@@ -13,7 +13,7 @@
 
 <?php include 'includes/navbar.php'; ?>
 
-<?php include 'includes/itinerary.php'; ?>
+<?php include 'includes/destinations.php'; ?>
 
 <?php include 'includes/footer.php'; ?>
 

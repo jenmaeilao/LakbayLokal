@@ -5,7 +5,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>LakbayPH — Discover the Philippines</title>
+  <title>Lakbaylokal — Discover the Philippines</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="assets/styles.css">
   
@@ -38,7 +38,7 @@
 <section class="how-section">
   <div class="section-header">
     <div class="section-tag">Simple Process</div>
-    <h2 class="section-title">How <em>LakbayPH</em> Works</h2>
+    <h2 class="section-title">How <em>Lakbaylokal</em> Works</h2>
     <p class="section-sub">From destination to doorstep — planning your Philippine trip has never been easier.</p>
   </div>
   <div class="steps-grid">
@@ -282,8 +282,6 @@
   </div>
 </section>
 
-
-
 <!-- ── REVIEWS ── -->
 <section class="reviews-section" id="reviews">
   <div class="section-header">
@@ -293,7 +291,7 @@
   <div class="reviews-grid">
     <div class="review-card">
       <div class="review-stars">★★★★★</div>
-      <p class="review-text">"Baguio was absolutely magical! The strawberry farm tour was my favorite — fresh picks and amazing views. LakbayPH made the whole booking so easy."</p>
+      <p class="review-text">"Baguio was absolutely magical! The strawberry farm tour was my favorite — fresh picks and amazing views. Lakbaylokal made the whole booking so easy."</p>
       <div class="review-author">
         <div class="review-avatar" style="background:var(--teal)">MR</div>
         <div class="review-info"><strong>Maria Reyes</strong><span>Baguio City Trip · May 2025</span></div>

@@ -1,7 +1,7 @@
 <?php include_once __DIR__ . '/config.php'; ?>
 
 <nav>
-  <div class="nav-logo">Lakbay<span>PH</span></div>
+  <div class="nav-logo">Lakbay<span>lokal</span></div>
 
   <ul class="nav-links">
 

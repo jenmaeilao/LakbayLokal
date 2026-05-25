@@ -13,6 +13,7 @@ if ($email === '' || $password === '') {
     exit;
 }
 
+
 $mysqli = db();
 $stmt = $mysqli->prepare('SELECT fullname, password, role FROM users WHERE email = ? LIMIT 1');
 if (!$stmt) {

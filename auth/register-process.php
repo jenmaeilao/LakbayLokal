@@ -30,6 +30,7 @@ if (strlen($password) < 6) {
     exit;
 }
 
+
 $mysqli = db();
 $stmt = $mysqli->prepare('SELECT id FROM users WHERE email = ? LIMIT 1');
 if (!$stmt) {

@@ -6,9 +6,9 @@
   <ul class="nav-links">
 
     <li><a href="<?= BASE_URL ?>/index.php">Home</a></li>
-    <li><a href="<?= BASE_URL ?>/hotels/list.php">Hotels</a></li>
-     <li><a href="<?= BASE_URL ?>/destinations.php">Destinations</a></li>
-    <li><a href="<?= BASE_URL ?>/itinerary.php">Plan Trip</a></li>
+    <li><a href="<?= BASE_URL ?>/index.php#destinations">Destinations</a></li>
+    <li><a href="<?= BASE_URL ?>/index.php#hotels">Hotels</a></li>
+    <li><a href="<?= BASE_URL ?>/index.php#itinerary">Plan Trip</a></li>
 
   </ul>
 

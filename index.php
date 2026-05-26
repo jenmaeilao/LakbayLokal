@@ -282,6 +282,8 @@
   </div>
 </section>
 
+<?php include 'includes/itinerary.php'; ?>
+
 <!-- ── REVIEWS ── -->
 <section class="reviews-section" id="reviews">
   <div class="section-header">

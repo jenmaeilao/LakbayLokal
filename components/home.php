@@ -17,25 +17,6 @@
         <div class="stat-item"><div class="stat-num">100%</div><div class="stat-label">Local Picks</div></div>
       </div>
     </div>
-
-    <div class="hero-visual">
-      <div class="hero-card">
-        <div style="height:130px;background:linear-gradient(135deg,#8ECAC0,#2E6B4F);display:flex;align-items:center;justify-content:center;font-size:3.5rem;">🏄</div>
-        <div class="hero-card-body">
-          <h4>Siargao Island</h4>
-          <p>Surf &amp; Island Hop</p>
-          <div class="hero-card-price">from ₱3,700</div>
-        </div>
-      </div>
-      <div class="hero-card" style="margin-top:0;align-self:flex-end">
-        <div style="height:130px;background:linear-gradient(135deg,#F5D5B0,#C4602A);display:flex;align-items:center;justify-content:center;font-size:3.5rem;">🏔️</div>
-        <div class="hero-card-body">
-          <h4>Baguio City</h4>
-          <p>Cool mountain escape</p>
-          <div class="hero-card-price">from ₱4,500</div>
-        </div>
-      </div>
-    </div>
   </section>
 
   <!-- SEARCH -->

@@ -15,6 +15,8 @@
 
 <?php include 'includes/itinerary.php'; ?>
 
+
+
 <?php include 'includes/footer.php'; ?>
 
 <script src="assets/script.js"></script>

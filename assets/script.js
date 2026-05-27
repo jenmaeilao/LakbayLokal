@@ -1,15 +1,29 @@
+  console && console.debug && console.debug('assets/script.js loaded');
+
+  /* ── GLOBAL STATE ── */
+  let selectedActivities = {};
+
   /* ── MODAL ── */
   function openModal(tab) {
-    document.getElementById('authModal').classList.add('open');
+    const authModal = document.getElementById('authModal');
+    if (!authModal) return;
+    authModal.classList.add('open');
     switchTab(tab);
   }
-  function closeModal() { document.getElementById('authModal').classList.remove('open'); }
-  document.getElementById('authModal').addEventListener('click', function(e) { if(e.target===this) closeModal(); });
+  function closeModal() {
+    const authModal = document.getElementById('authModal');
+    if (!authModal) return;
+    authModal.classList.remove('open');
+  }
+  // Modal event hookup is attached on DOMContentLoaded to avoid null refs
 
   function switchTab(tab) {
-    document.querySelectorAll('.modal-tab').forEach((t,i) => t.classList.toggle('active', (i===0&&tab==='login')||(i===1&&tab==='register')));
-    document.getElementById('loginForm').classList.toggle('active', tab==='login');
-    document.getElementById('registerForm').classList.toggle('active', tab==='register');
+    const modalTabs = document.querySelectorAll('.modal-tab');
+    modalTabs.forEach((t,i) => t.classList.toggle('active', (i===0&&tab==='login')||(i===1&&tab==='register')));
+    const loginForm = document.getElementById('loginForm');
+    const registerForm = document.getElementById('registerForm');
+    if (loginForm) loginForm.classList.toggle('active', tab==='login');
+    if (registerForm) registerForm.classList.toggle('active', tab==='register');
   }
 
   /* ── DESTINATION FILTER ── */
@@ -26,11 +40,20 @@
 
   /* ── SELECT DEST ── */
   function selectDest(name) {
-    const map = { 'Baguio City':'baguio', 'Boracay':'boracay', 'Cebu City':'cebu', 'Bukidnon':'bukidnon' };
+    const map = { 'Baguio City':'baguio', 'Boracay':'boracay', 'Cebu City':'cebu', 'Bukidnon':'bukidnon', 'Vigan':'vigan', 'Davao City':'davao', 'Camiguin':'camiguin' };
     const val = map[name];
     if (val) {
       document.getElementById('planDest').value = val;
       updateHotels();
+      filterHotelsByKey(val);
+    } else {
+      // If we don't have a mapped key, still try to filter by name text
+      document.querySelectorAll('.hotel-card').forEach(card => {
+        const destEl = card.querySelector('.hotel-dest');
+        if (!destEl) return;
+        const txt = destEl.textContent || destEl.innerText || '';
+        card.style.display = txt.toLowerCase().includes(name.toLowerCase()) ? '' : 'none';
+      });
     }
     document.getElementById('itinerary').scrollIntoView({behavior:'smooth'});
   }
@@ -40,58 +63,135 @@
     baguio: {
       hotels: [
         {name:'Hotel Veniz', price:1800},
-        {name:'The Manor at Camp John Hay', price:8500},
-        {name:'Microtel by Wyndham', price:2500}
-      ],
-      activities: ['Burnham Park (Free)','Strawberry Farm (₱200)','Café Hopping (₱300)','Hiking/Trekking (₱500)','Botanical Garden (₱400)'],
+        {name:'Microtel by Wyndham Baguio', price:8500},
+        {name:'Travelite Express Hotel', price:2500}
+      ], 
+      activities: ['Strawberry Picking at La Trinidad Farm ₱250','BenCab Museum Gallery Tour ₱200','Tree Top Adventure (Camp John Hay) ₱400','Igorot Stone Kingdom Exploration ₱150',],
       actPrices: [0,200,300,500,400]
     },
     boracay: {
       hotels: [
         {name:'Henann Resort Boracay', price:12000},
         {name:'Fairways & Bluewater', price:6000},
-        {name:'Boracay Budget Inn', price:1200}
+        {name:'La Carmela de Boracay Resort Hotel', price:1200}
       ],
-      activities: ['Island Hopping (₱800)','Parasailing (₱1500)','Helmet Diving (₱1200)','ATV Ride (₱600)','Sunset Sailing (₱900)'],
+      activities: ['Island Hopping ₱800','Parasailing Activity ₱2,000','Helmet Diving ₱700','ATV Ride ₱600'],
       actPrices: [800,1500,1200,600,900]
     },
     cebu: {
       hotels: [
-        {name:'Radisson Blu Cebu', price:9000},
-        {name:'Seda Ayala Center Cebu', price:5500},
-        {name:'Harolds Evotel Cebu', price:2200}
+        {name:'Quest Hotel Cebu', price:9000},
+        {name:'Radisson Blu Cebu', price:5500},
+        {name:'Bayfront Hotel Cebu', price:2200}
       ],
-      activities: ['Whale Shark Watching (₱1000)','Canyoneering (₱800)','Magellan\'s Cross (Free)','Temple of Leah (₱150)','Sinulog Museum (₱200)'],
-      actPrices: [1000,800,0,150,200]
+      activities: ['Kawasan Falls Canyoneering  ₱1,500','Temple of Leah Tour  ₱100','Oslob Whale Shark Watching  ₱500'],
+      actPrices: [1500,100,500]
     },
     bukidnon: {
       hotels: [
-        {name:'Mallberry Suites', price:3500},
-        {name:'Dahilayan Forest Park', price:4200},
-        {name:'Citi Inn Bukidnon', price:1500}
+        {name:'Dahilayan Forest Park Resort', price:3500},
+        {name:'Ultrawinds Mountain Resort', price:4200},
+        {name:'Secret Haven Private Resort', price:1500}
       ],
-      activities: ['Dahilayan Adventure Park (₱600)','Del Monte Pineapple Plantation (₱300)','Monastery of Transfiguration (Free)','Kampo Juan (₱200)','Impalutao Highland Resort (₱400)'],
-      actPrices: [600,300,0,200,400]
+      activities: ['ATV (Dahilayan Adventure Park) ₱850','840m Zipline (Dahilayan Adventure park) ₱500','DropZone (Dahilayan Adventure park) ₱500','ZipKart  (Dahilayan Adventure park) ₱250'],
+      actPrices: [850,500,500,250,400]
+    },
+    vigan: {
+      hotels: [
+        {name:'Hotel Felicidad Vigan', price:3200},
+        {name:'Paradores de Vigan', price:2800},
+        {name:'Hotel Luna', price:2600}
+      ],
+      activities: ['Calesa Ride around Calle Crisologo (₱250)','Pagburnayan Jar Factory Pottery Making ₱300','Vigan Museum / Syquia Mansion Tour ₱180'],
+      actPrices: [250,300,150,200,0]
+    },
+    palawan: {
+      hotels: [
+        {name:'Seda Lio (El Nido) ', price:6000},
+        {name:'Hue Hotels and Resorts', price:4200},
+        {name:'Two Seasons Coron Island Resort', price:8500}
+      ],
+      activities: ['El Nido Tour A (Lagoons & Islands) ₱1,200','Puerto Princesa Underground River Tour ₱2,750','Coron Ultimate Shipwreck & Snorkeling Tour ₱1,600', 'Wildlife Safari Tour at Calauit Sanctuary ₱2,500'],
+      actPrices: [1200,2750,1600,2500,800]
+    },
+    siargao: {
+      hotels: [
+        {name:'Villa Cali', price:7500},
+        {name:'Nay Palad Hideawa', price:3800},
+        {name:'Kalinaw Resort', price:2800}
+      ],
+      activities: ['Island Hopping ₱2,000','Basic Surfing Lesson ₱700','Motorbike Rental ₱500','Sugba Lagoon Tour ₱1,200'],
+      actPrices: [2000,700,500,1200]
     }
   };
 
-  let selectedActivities = {};
+  const destNames = {baguio:'Baguio City',boracay:'Boracay',cebu:'Cebu City',bukidnon:'Bukidnon',vigan:'Vigan City',palawan:'Palawan',siargao:'Siargao Island',davao:'Davao City',camiguin:'Camiguin'};
 
   function updateHotels() {
+    try {
     const dest = document.getElementById('planDest').value;
     const hotelSel = document.getElementById('planHotel');
     const actGrid = document.getElementById('activitiesGrid');
+    console && console.debug && console.debug('updateHotels called, dest=', dest, 'hotelSel=', !!hotelSel, 'actGrid=', !!actGrid);
+    if (!hotelSel) { console && console.error && console.error('planHotel select not found'); return; }
     hotelSel.innerHTML = '<option value="">Select hotel...</option>';
     selectedActivities = {};
-    if (!dest) { actGrid.innerHTML = ''; return; }
-    const d = destData[dest];
+    if (!dest) { actGrid.innerHTML = ''; filterHotelsByKey(''); return; }
+    // dest may be a short key like 'baguio' or a full name like 'Baguio City'.
+    let d = destData[dest];
+    let useKey = dest;
+    if (!d) {
+      // try to resolve the key from destNames mapping
+      for (const k in destNames) {
+        const nm = (destNames[k] || '').toLowerCase();
+        const val = (dest || '').toLowerCase();
+        if (!nm) continue;
+        if (val === k.toLowerCase() || val === nm || nm.includes(val) || val.includes(nm)) {
+          d = destData[k];
+          useKey = k;
+          break;
+        }
+      }
+    }
+    if (!d) {
+      // No data for this destination — clear activities and filter hotels by key/text
+      console && console.debug && console.debug('No destData for', dest, 'resolved useKey=', useKey);
+      actGrid.innerHTML = '';
+      filterHotelsByKey(dest);
+      updateSummary();
+      return;
+    }
     d.hotels.forEach((h,i) => {
       hotelSel.innerHTML += `<option value="${h.price}">${h.name} — ₱${h.price.toLocaleString()}/night</option>`;
     });
+    console && console.debug && console.debug('Populated', d.hotels.length, 'hotels into planHotel');
     actGrid.innerHTML = d.activities.map((a,i) =>
       `<div class="activity-check" onclick="toggleActivity(this,${d.actPrices[i]})"><div class="check-icon"></div> ${a}</div>`
     ).join('');
+    // Filter the hotels grid to show only hotels for this destination
+    filterHotelsByKey(useKey || dest);
     updateSummary();
+    } catch (err) {
+      console && console.error && console.error('updateHotels error', err);
+    }
+  }
+
+  function filterHotelsByKey(key) {
+    const cards = document.querySelectorAll('.hotel-card');
+    if (!key) { cards.forEach(c => c.style.display = ''); return; }
+    const name = destNames[key] || '';
+    cards.forEach(card => {
+      // Prefer a data attribute if present for robust matching
+      const dataDest = (card.dataset && card.dataset.destination) ? card.dataset.destination.toLowerCase() : '';
+      if (dataDest) {
+        card.style.display = (dataDest === key.toLowerCase() || dataDest.includes(key.toLowerCase())) ? '' : 'none';
+        return;
+      }
+      const destEl = card.querySelector('.hotel-dest');
+      if (!destEl) { card.style.display = ''; return; }
+      const txt = destEl.textContent || destEl.innerText || '';
+      card.style.display = txt.toLowerCase().includes(name.toLowerCase()) ? '' : 'none';
+    });
   }
 
   function toggleActivity(el, price) {
@@ -131,3 +231,23 @@
     if (!dest) { alert('Please select a destination first!'); return; }
     alert('✅ Booking confirmed! (This would redirect to the checkout/payment page in the full system.)');
   }
+
+  // Ensure the hotels and filters initialize if a destination is already selected on page load
+  window.addEventListener('DOMContentLoaded', function() {
+    try {
+      const sel = document.getElementById('planDest');
+      // Attach modal click handler here to ensure element exists
+      const authModalElement = document.getElementById('authModal');
+      if (authModalElement) {
+        authModalElement.addEventListener('click', function(e) { if (e.target === this) closeModal(); });
+      }
+      if (sel && sel.value) {
+        updateHotels();
+      } else {
+        // If no selection, ensure hotel cards are visible
+        filterHotelsByKey('');
+      }
+    } catch (e) {
+      console && console.warn && console.warn('Itinerary init error:', e);
+    }
+  });

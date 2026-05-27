@@ -1,3 +1,4 @@
+
 <?php include '../includes/config.php'; ?>
 <?php include '../includes/navbar.php'; ?>
 <link rel="stylesheet" href="../assets/styles.css">
@@ -58,7 +59,16 @@
 
     foreach ($hotels as $hotel): ?>
       
-      <div class="hotel-card">
+      <?php
+        // map common location strings to data keys used by the front-end
+        $loc = $hotel['location'];
+        $key = 'other';
+        if (stripos($loc, 'baguio') !== false) $key = 'baguio';
+        elseif (stripos($loc, 'boracay') !== false) $key = 'boracay';
+        elseif (stripos($loc, 'cebu') !== false) $key = 'cebu';
+      ?>
+
+      <div class="hotel-card" data-destination="<?= htmlspecialchars($key) ?>">
         <div class="hotel-dest">📍 <?= $hotel['location'] ?></div>
 
         <div class="hotel-name">

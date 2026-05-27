@@ -31,7 +31,7 @@ lakbaylokal/ (ROOT FOLDER)
 │   └── footer.php
 ├── data.php             # Central Mock Data Store (Destinations, Hotels, Itineraries)
 └── index.php            # Master Application Constructor (SPA Router)
-
+```
 ---
 
 ## 📌 Project Status & Development Roadmap

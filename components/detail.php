@@ -10,11 +10,11 @@
   <div class="detail-layout">
     <div>
       <div class="hotels-section">
-        <h2>🏨 Choose a Hotel</h2>
+        <h2>Choose a Hotel</h2>
         <div class="hotel-list" id="hotelList"></div>
       </div>
       <div class="activities-section">
-        <h2>🎯 Add Activities</h2>
+        <h2>Add Activities</h2>
         <div class="activity-list" id="activityList"></div>
       </div>
     </div>

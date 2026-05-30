@@ -28,6 +28,7 @@
   </div>
 </footer>
 
+
 <script src="<?= $rootPath ?? '' ?>assets/script.js"></script>
 </body>
 </html>

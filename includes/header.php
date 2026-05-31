@@ -26,18 +26,58 @@ $userName = $_SESSION['user']['name'] ?? '';
   <nav>
     <div class="nav-logo" onclick="location.href='<?= $rootPath ?? '' ?>index.php'">Lakbay<span>Lokal</span></div>
     <ul class="nav-links">
-      <li><a href="<?= $rootPath ?? '' ?>index.php" class="<?= ($activePage ?? '') === 'home'         ? 'active' : '' ?>">Home</a></li>
-      <li><a href="<?= $rootPath ?? '' ?>destinations.php" class="<?= ($activePage ?? '') === 'destinations'  ? 'active' : '' ?>">Destinations</a></li>
-      <li><a href="<?= $rootPath ?? '' ?>index.php#about" class="<?= ($activePage ?? '') === 'about'         ? 'active' : '' ?>">About</a></li>
-      <li><a href="<?= $rootPath ?? '' ?>index.php#mytrips" class="<?= ($activePage ?? '') === 'mytrips'       ? 'active' : '' ?>">My Trips</a></li>
+
+      <li><a href="<?= $rootPath ?? '' ?>index.php"
+          class="<?= ($activePage ?? '') === 'home' ? 'active' : '' ?>">
+          Home
+        </a></li>
+
+      <li><a href="<?= $rootPath ?? '' ?>destinations.php"
+          class="<?= ($activePage ?? '') === 'destinations' ? 'active' : '' ?>">
+          Destinations
+        </a></li>
+
+      <li><a href="<?= $rootPath ?? '' ?>index.php#about"
+          class="<?= ($activePage ?? '') === 'about' ? 'active' : '' ?>">
+          About
+        </a></li>
+
+      <li><a href="<?= $rootPath ?? '' ?>index.php#mytrips"
+          class="<?= ($activePage ?? '') === 'mytrips' ? 'active' : '' ?>">
+          My Trips
+        </a></li>
+
+      <!-- 🔥 ADMIN ONLY DASHBOARD -->
+      <?php if (isset($_SESSION['user']) && ($_SESSION['user']['role'] ?? '') === 'admin'): ?>
+        <li>
+          <a href="<?= $rootPath ?? '' ?>admin/index.php"
+            class="<?= ($activePage ?? '') === 'dashboard' ? 'active' : '' ?>">
+            Dashboard
+          </a>
+        </li>
+      <?php endif; ?>
+
     </ul>
     <div class="nav-actions">
 
-      <!-- These elements are always in the DOM; JavaScript controls visibility -->
-      <span id="navUserName" class="nav-user" style="display: <?= $isLoggedIn ? 'block' : 'none'; ?>">👤 <?= htmlspecialchars($userName) ?></span>
-      <button id="navLogoutBtn" class="nav-ghost" onclick="logoutUser()" style="display: <?= $isLoggedIn ? 'block' : 'none'; ?>">Logout</button>
-      <button id="navLoginBtn" class="nav-ghost" onclick="openAuthModal('login')" style="display: <?= $isLoggedIn ? 'none' : 'block'; ?>">Login</button>
-      <button id="navSignupBtn" class="nav-cta" onclick="openAuthModal('signup')" style="display: <?= $isLoggedIn ? 'none' : 'block'; ?>">Sign Up</button>
+      <?php if ($isLoggedIn && ($_SESSION['user']['role'] ?? '') === 'admin'): ?>
+        <a href="<?= $rootPath ?? '' ?>admin/index.php" class="nav-ghost">
+          Admin Panel
+        </a>
+      <?php endif; ?>
+
+      <span id="navUserName" class="nav-user" style="display: <?= $isLoggedIn ? 'block' : 'none'; ?>">
+        👤 <?= htmlspecialchars($userName) ?>
+      </span>
+      <button id="navLogoutBtn" class="nav-ghost" onclick="logoutUser()" style="display: <?= $isLoggedIn ? 'block' : 'none'; ?>">
+        Logout
+      </button>
+      <button id="navLoginBtn" class="nav-ghost" onclick="openAuthModal('login')" style="display: <?= $isLoggedIn ? 'none' : 'block'; ?>">
+        Login
+      </button>
+      <button id="navSignupBtn" class="nav-cta" onclick="openAuthModal('signup')" style="display: <?= $isLoggedIn ? 'none' : 'block'; ?>">
+        Sign Up
+      </button>
 
     </div>
     <button class="hamburger" onclick="document.getElementById('mobileMenu').classList.toggle('open')" aria-label="Menu">
